@@ -3,10 +3,11 @@ import Keys._
 
 object build extends Build {
   lazy val sharedSettings = Defaults.defaultSettings ++ Seq(
-    scalaVersion := "2.10.2",
+    scalaVersion := "2.10.2-RC1",
     crossVersion := CrossVersion.full,
     version := "2.0.0-SNAPSHOT",
-    organization := "org.scala-lang.plugins",
+    scalaOrganization := "org.scala-lang.virtualized",
+    organization := "org.scala-lang.virtualized.plugins",
     resolvers += Resolver.sonatypeRepo("snapshots"),
     resolvers += Resolver.sonatypeRepo("releases"),
     publishMavenStyle := true,
@@ -55,9 +56,9 @@ object build extends Build {
     sharedSettings : _*
   ) settings (
     resourceDirectory in Compile <<= baseDirectory(_ / "src" / "main" / "scala" / "org" / "scalalang" / "macroparadise" / "embedded"),
-    libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-library" % _),
-    libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-reflect" % _),
-    libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-compiler" % _),
+    libraryDependencies <+= (scalaVersion)("org.scala-lang.virtualized" % "scala-library" % _),
+    libraryDependencies <+= (scalaVersion)("org.scala-lang.virtualized" % "scala-reflect" % _),
+    libraryDependencies <+= (scalaVersion)("org.scala-lang.virtualized" % "scala-compiler" % _),
     // TODO: how to I make this recursion work?
     // run <<= run in Compile in sandbox,
     // test <<= test in Test in tests
@@ -123,7 +124,7 @@ object build extends Build {
   ) settings (
     sharedSettings ++ usePluginSettings: _*
   ) settings (
-    libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-reflect" % _),
+    libraryDependencies <+= (scalaVersion)("org.scala-lang.virtualized" % "scala-reflect" % _),
     publishArtifact in Compile := false
   )
 
@@ -133,8 +134,8 @@ object build extends Build {
   ) settings (
     sharedSettings ++ usePluginSettings: _*
   ) settings (
-    libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-reflect" % _),
-    libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-compiler" % _),
+    libraryDependencies <+= (scalaVersion)("org.scala-lang.virtualized" % "scala-reflect" % _),
+    libraryDependencies <+= (scalaVersion)("org.scala-lang.virtualized" % "scala-compiler" % _),
     libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test",
     libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.10.1" % "test",
     publishArtifact in Compile := false,
